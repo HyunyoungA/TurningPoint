@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+layout:decorate="layout/default_layout">
+<head>
+<meta charset="UTF-8"/>
+<title>터닝포인트 TURNIN GPOINT</title>
+<style type="text/css">
+.loginPage {
+    min-width: 1050px;
+    margin-top: 90px;
+    margin-bottom: 90px;
+    background-color: rgb(255, 255, 255);
+}
+.loginText {
+	font-weight: 800;
+    font-size: 20px;
+    line-height: 20px;
+    text-align: center;
+}
+.login_wrap {
+	width: 340px;
+    margin: 0px auto;
+    letter-spacing: -0.6px;
+}
+.login_blank {
+    height: 54px;
+    font-size: 14px;
+	width: 100%;
+    height: 46px;
+    padding: 0px 11px 1px 15px;
+    border-radius: 4px;
+    border: 1px solid rgb(221, 221, 221);
+    font-weight: 400;
+    line-height: 1.5;
+    color: rgb(51, 51, 51);
+    outline: none;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+}
+.blank_wrap {
+    margin-top: 30px;
+}
+.login_button{
+    height: 54px;
+    font-size: 14px;
+	width: 100%;
+    height: 46px;
+    padding: 0px 11px 1px 15px;
+    border-radius: 4px;
+    border: 1px solid rgb(221, 221, 221);
+    font-weight: 400;
+    line-height: 1.5;
+    color: rgb(51, 51, 51);
+    outline: none;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+    background: rgb(95, 0, 128);
+}
+.login_button span {
+	font-size: 16px;
+    font-weight: 500;
+    color: white;
+}
+.find_wrap {
+    display: flex;
+    -webkit-box-pack: end;
+    justify-content: flex-end;
+    font-size: 13px;
+}
+.find_wrap span {
+	display: inline-block;
+	width: 1px;
+    height: 10px;
+    margin: 3px 6px 0px;
+    background-color: rgb(51, 51, 51);
+}
+#kakao {
+	background-color: rgb(255, 205, 0);
+	display: flex;
+    gap: 9px;
+    padding: 13px 81px 8px;
+}
+#kakao span {
+	color: black;
+}
+</style>
+</head>
+<body>
+	<div>
+		<th:block th:insert="layouts/header :: header"></th:block>
+	</div>
+	<div class="loginPage">
+		<h2 class="loginText">로그인</h2>
+		<div class="login_wrap">
+			<form action="">
+	            <div class="blank_wrap">
+	                <input data-testid="input-box" name="id" placeholder="아이디를 입력해주세요" type="text" class="login_blank" value="">
+	            </div>
+	            <div>
+	                <input data-testid="input-box" name="password" placeholder="비밀번호를 입력해주세요" type="text" class="login_blank" value="">
+	            </div>
+	            <div class="find_wrap">
+	            	<a class="find" href="/findId">아이디 찾기</a>
+	            	<span></span>
+	            	<a class="find" href="/findPassword">비밀번호 찾기</a>
+	            </div>
+	            <br/>
+	            <div>
+	            	<button type="submit" class="login_button">
+	            		<span>로그인</span>
+	            	</button>
+	            	<button type="button" class="login_button" onClick="location.href='/join'">
+	            		<span>회원가입</span>
+	            	</button>
+	            	<button type="button" id="kakao" class="login_button">
+	            		<svg width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M8.917 10.614h1.442l-.692-2.167-.75 2.167z" fill="#381E1F"></path><mask id="kakao_svg__a" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="23" style="mask-type: alpha;"><path fill-rule="evenodd" clip-rule="evenodd" d="M0 .428h23.856v21.918H0V.428z" fill="#fff"></path></mask><g mask="url(#kakao_svg__a)"><path fill-rule="evenodd" clip-rule="evenodd" d="M19.736 12.78l-1.64-2.236-.374.3v1.687c0 .5-1.276.502-1.276.001 0-.248.016-2.91.018-4.293 0-.389 0-.682-.003-.785-.008-.262.328-.397.656-.397.307 0 .606.118.612.361.007.233.008.532.008.82 0 .512-.007.986-.007.986l.985-.985c.488-.488.999-1 1.128-1.127.272-.27 1.113.576.842.846l-.275.28c-.543.563-1.372 1.461-1.372 1.461l1.74 2.292c.33.437-.711 1.226-1.042.789zm-4.067.098c-.585 0-1.902.005-2.496.005-.593 0-.494-.693-.494-.693l-.005-3.951v-.614c-.002-.38.335-.57.673-.57.336 0 .67.188.672.567v.617c0 1.21-.003 3.389-.003 3.389s1.065.006 1.65.006c.584 0 .588 1.244.003 1.244zm-4.663-.287l-.224-.833H8.507l-.248.87c-.265.61-1.41.113-1.144-.497.282-.65 1.001-2.683 1.457-3.892.137-.361.25-.653.32-.807.121-.267.406-.374.698-.374.353 0 .718.156.82.374.054.118.171.414.321.807.45 1.175 1.194 3.213 1.455 3.904.245.646-.936 1.093-1.18.448zm-4.908-.175c.002.58-1.29.55-1.292-.03.006-.716 0-3.578 0-4.147v-.107H3.562c-.728 0-.73-1.278-.001-1.278h3.78c.774 0 .772 1.31 0 1.31l-1.238.01v.065l-.005 4.177zm17.58-4.177c-.972-4.436-5.861-7.81-11.75-7.81S1.151 3.802.18 8.238A7.557 7.557 0 000 9.859c0 3.39 2.263 6.36 5.659 8.023-.25.931-.904 3.374-1.035 3.897-.16.648.238.64.5.465.205-.136 3.268-2.22 4.59-3.118.717.107 1.458.163 2.214.163 6.588 0 11.928-4.223 11.928-9.43 0-.553-.063-1.094-.178-1.62z" fill="#381E1F"></path></g></svg>
+	            		<span>카카오톡 로그인</span>
+	            	</button>
+	            </div>
+	 		</form>
+		</div>
+	</div>
+	<div class="footer">
+	    <th:block th:insert="layouts/footer :: footer"></th:block>
+    </div>
+	<script type="text/javascript">
+	
+	</script>
+</body>
+</html>

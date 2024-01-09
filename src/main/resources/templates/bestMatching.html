@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+layout:decorate="layout/default_layout">
+<head>
+<meta charset="UTF-8" />
+<title>터닝포인트 TURNIN GPOINT</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<style type="text/css">
+* {
+    box-sizing: border-box;
+    margin: 0;
+	padding: 0;
+}
+.content {
+    position: relative;
+}
+.category {
+	display: flex;
+    flex-direction: column;
+    width: 1050px;
+    margin: 0px auto;
+}
+.categoryList_api {
+	display: inline-block;
+    vertical-align: top;
+    white-space: normal;
+}
+.category_tab {
+	display: block;
+    height: 36px;
+    margin: 12px 0 12px 6px;
+    padding: 0 12px;
+    border-radius: 36px;
+    font-weight: 500;
+    line-height: 36px;
+    color: #222225;
+    letter-spacing: -.3px;
+    text-decoration: none;
+    background-color: #f7f7f9;
+}
+.category_tab:hover {
+	background-color: #F0F0F0;
+}
+.category_tab i {
+	width: 14px;
+    height: 20px;
+    background-position: -114px -140px;
+}
+.category_wrap {
+	margin-bottom: 40px;
+    min-width: 1050px;
+    text-align: center;
+}
+.category_wrap h2 {
+    padding: 60px 0 20px 0;
+    font-size: 36px;
+    text-align: center;
+}
+a {
+	cursor: pointer;
+}
+.BestMatching_wrap {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 60px;
+    padding: 0 10px;
+    min-width: 1050px;
+}
+.BestMatching_tab {
+	display: block;
+	padding: 0 8px 30px;
+    width: 25%;
+}
+.thumb {
+    display: block;
+    position: relative;
+    padding-top: 100%;
+    border-radius: 8px;
+    background-repeat: no-repeat;
+    background-position: 50%;
+    background-size: cover;
+    overflow: hidden;
+}
+.thumb-img {
+	position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding-top: 110%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 50%;
+    transition: transform .25s ease-in-out;
+}
+.thumb span {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 26px;
+    height: 30px;
+    border-radius: 0;
+    font-size: 12px;
+    line-height: 26px;
+    font-weight: 500;
+    text-align: center;
+    color: #fff;
+    background: url(/static/23.06.01/images/ic-bg-flag@3x.png) no-repeat 0 0;
+    background-size: 100% 100%;
+    z-index: 10;
+}
+.title_text {
+    margin-top: 12px;
+    padding: 0;
+}
+</style>
+</head>
+<body>
+    <div id="wrap">
+    	<div id="header_wrap">
+     		<th:block th:insert="layouts/header :: header"></th:block>
+    	</div>
+    	<div class="content">
+    		<main>
+    			<!-- 카테고리 -->
+    			<div class="category">
+	    			<div class="category_wrap">
+	    				<h2>인기 매칭</h2>
+	    				<div class="categoryList_api">
+	    					<a class="category_tab">
+	    						<i></i>PT
+	    					</a>
+	    				</div>
+	    				<div class="categoryList_api">
+	    					<a class="category_tab">
+	    						<i></i>크로스핏
+	    					</a>
+	    				</div>
+	    				<div class="categoryList_api">
+	    					<a class="category_tab">
+	    						<i></i>필라테스
+	    					</a>
+	    				</div>
+	    				<div class="categoryList_api">
+	    					<a class="category_tab">
+	    						<i></i>요가
+	    					</a>
+	    				</div>
+	    			</div>
+	    			
+	    			<!-- 인기 매칭 리스트 -->
+	    			<div class="BestMatching_wrap">
+	    				<div class="BestMatching_tab">
+	    					<a href="/bestMatchingDetail">
+	    						<div class="thumb">
+	    							<div class="thumb-img" style="background-image: url(&quot;https://image.brandi.me/cproduct/BRANDI/2023/12/18/01b5f3c0-e363-430b-a9fb-b9144c0b7a42/SB000000000122184604_1702880529_image1_S.jpeg&quot;);"></div>
+	    							<span>1</span>
+	    						</div>
+	    						<div class="title_text">PT</div>
+	    					</a>
+	    				</div>
+	    				<div class="BestMatching_tab">
+	    					<a>
+	    						<div class="thumb">
+	    							<div class="thumb-img" style="background-image: url(&quot;https://image.brandi.me/cproduct/BRANDI/2023/12/18/01b5f3c0-e363-430b-a9fb-b9144c0b7a42/SB000000000122184604_1702880529_image1_S.jpeg&quot;);"></div>
+	    							<span>1</span>
+	    						</div>
+	    						<div class="title_text">PT</div>
+	    					</a>
+	    				</div>
+	    				<div class="BestMatching_tab">
+	    					<a>
+	    						<div class="thumb">
+	    							<div class="thumb-img" style="background-image: url(&quot;https://image.brandi.me/cproduct/BRANDI/2023/12/18/01b5f3c0-e363-430b-a9fb-b9144c0b7a42/SB000000000122184604_1702880529_image1_S.jpeg&quot;);"></div>
+	    							<span>1</span>
+	    						</div>
+	    						<div class="title_text">PT</div>
+	    					</a>
+	    				</div>
+	    				<div class="BestMatching_tab">
+	    					<a>
+	    						<div class="thumb">
+	    							<div class="thumb-img" style="background-image: url(&quot;https://image.brandi.me/cproduct/BRANDI/2023/12/18/01b5f3c0-e363-430b-a9fb-b9144c0b7a42/SB000000000122184604_1702880529_image1_S.jpeg&quot;);"></div>
+	    							<span>1</span>
+	    						</div>
+	    						<div class="title_text">PT</div>
+	    					</a>
+	    				</div>
+	    				<div class="BestMatching_tab">
+	    					<a>
+	    						<div class="thumb">
+	    							<div class="thumb-img" style="background-image: url(&quot;https://image.brandi.me/cproduct/BRANDI/2023/12/18/01b5f3c0-e363-430b-a9fb-b9144c0b7a42/SB000000000122184604_1702880529_image1_S.jpeg&quot;);"></div>
+	    							<span>1</span>
+	    						</div>
+	    						<div class="title_text">PT</div>
+	    					</a>
+	    				</div>
+	    				<div class="BestMatching_tab">
+	    					<a>
+	    						<div class="thumb">
+	    							<div class="thumb-img" style="background-image: url(&quot;https://image.brandi.me/cproduct/BRANDI/2023/12/18/01b5f3c0-e363-430b-a9fb-b9144c0b7a42/SB000000000122184604_1702880529_image1_S.jpeg&quot;);"></div>
+	    							<span>1</span>
+	    						</div>
+	    						<div class="title_text">PT</div>
+	    					</a>
+	    				</div>
+	    			</div>
+    			</div>
+    		</main>
+	    	<div class="footer">
+	    		<th:block th:insert="layouts/footer :: footer"></th:block>
+    		</div>
+    	</div>
+        <!-- <H1>DB 연동 확인</H1>
+ 
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>userCode</th>
+                    <th>userName</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="row:${Alllist}">
+                    <th th:text="${row.USER_ID}"></th>
+                    <th th:text="${row.USERNAME}"></th>
+ 
+                </tr>
+            </tbody>
+ 
+        </table> -->
+    </div>
+    
+    <script type="text/javascript">
+	
+    </script>
+    
+    <script type="text/javascript" src="/js/common.js"></script>
+    
+</body>
+</html>

@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+layout:decorate="layout/default_layout">
+<head>
+<meta charset="UTF-8"/>
+<title>로그인</title>
+<style type="text/css">
+.joinPage {
+    min-width: 1050px;
+    margin-top: 50px;
+    margin-bottom: 60px;
+    background-color: rgb(255, 255, 255);
+}
+.joinTitle {
+	font-weight: 800;
+    font-size: 20px;
+    line-height: 20px;
+    text-align: center;
+}
+.join_wrap {
+	width: 640px;
+    margin: 0px auto;
+}
+.essential {
+    padding-bottom: 10px;
+    border-bottom: 2px solid rgb(51, 51, 51);
+    font-size: 12px;
+    color: rgb(102, 102, 102);
+    line-height: 17px;
+    text-align: right;
+}
+.essential_star {
+    color: rgb(238, 106, 123);
+}
+.join_article {
+    display: inline-flex;
+    width: 100%;
+    padding: 10px 20px;
+}
+.joinText {
+    width: 139px;
+    padding-top: 12px;
+}
+.joinText label {
+	font-weight: 500;
+    color: rgb(51, 51, 51);
+    line-height: 20px;
+}
+.blank_wrap {
+    flex: 1 1 0%;
+}
+.join_radio_wrap input[type=radio]{
+    accent-color: rgb(95, 0, 128);
+    min-width: 24px;
+    min-height: 24px;
+}
+.join_radio_wrap span {
+	display: flex;
+	font-size: 14px;
+    margin: 2px 12px 2px 7px;
+}
+.join_radio_wrap {
+	display: flex;
+    padding: 12px;
+}
+.blank_wrap textarea {
+    border: 1px solid rgb(221, 221, 221);
+	width: 461px;
+    height: 115px;
+    border-radius: 4px;
+    resize: none;
+}
+.career_wrap {
+    border: 1px solid rgb(221, 221, 221);
+    text-align: center;
+    border-radius: 4px;
+    width: 100px;
+    height: 46px;
+}
+.inner_blank{
+	width: 100%;
+    height: 46px;
+    padding: 0px 11px 1px 15px;
+    border-radius: 4px;
+    border: 1px solid rgb(221, 221, 221);
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.5;
+    color: rgb(51, 51, 51);
+    outline: none;
+    box-sizing: border-box;
+}
+.check_wrap {
+	width: 120px;
+    margin-left: 8px;
+}
+.check_button {
+    height: 44px;
+    border-radius: 3px;
+    display: block;
+    padding: 0px 10px;
+    text-align: center;
+    overflow: hidden;
+    width: 100%;
+    color: rgb(95, 0, 128);
+    background-color: rgb(255, 255, 255);
+    border: 1px solid rgb(95, 0, 128);
+}
+.check_button span {
+    font-weight: 500;
+    font-size: 14px;
+}
+.join_blank {
+    height: 54px;
+    font-size: 14px;
+	width: 100%;
+    height: 46px;
+    padding: 0px 11px 1px 15px;
+    border-radius: 4px;
+    border: 1px solid rgb(221, 221, 221);
+    font-weight: 400;
+    line-height: 1.5;
+    color: rgb(51, 51, 51);
+    outline: none;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+}
+.join_button{
+    height: 54px;
+    font-size: 14px;
+	width: 100%;
+    height: 46px;
+    padding: 0px 11px 1px 15px;
+    border-radius: 4px;
+    border: 1px solid rgb(221, 221, 221);
+    font-weight: 400;
+    line-height: 1.5;
+    color: rgb(51, 51, 51);
+    outline: none;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+    background: rgb(95, 0, 128);
+}
+.join_button span {
+	font-size: 16px;
+    font-weight: 500;
+    color: white;
+}
+.joinForm_wrap {
+    text-align: center;
+}
+.end_line {
+    border-bottom: 1px solid rgb(51, 51, 51);
+    margin-top: 18px;
+}
+.joinFormBtn {
+    font-size: 14px;
+    width: 240px;
+    height: 46px;
+    padding: 0px 11px 1px 15px;
+    border-radius: 4px;
+    border: 1px solid rgb(221, 221, 221);
+    font-weight: 400;
+    line-height: 1.5;
+    outline: none;
+    box-sizing: border-box;
+    margin: 40px;
+    background: rgb(95, 0, 128);
+}
+.joinFormBtn span {
+	color: white;
+    display: inline-block;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+</style>
+</head>
+<body>
+	<div>
+		<th:block th:insert="layouts/header :: header"></th:block>
+	</div>
+	<div class="joinPage">
+		<h2 class="joinTitle">회원가입</h2>
+		<div class="join_wrap">
+			<div class="essential">
+				<span class="essential_star">*</span>필수입력사항
+			</div>
+			<div class="join_article">
+				<div class="joinText">
+					<label>아이디
+						<span class="essential_star">*</span>
+					</label>
+				</div>
+				<div class="blank_wrap">
+					<input data-testid="input-box" id="memberId" name="memberId" placeholder="아이디를 입력해주세요" type="text" 
+							required="" class="inner_blank" value="">
+				</div>
+				<div class="check_wrap">
+					<button class="check_button">
+						<span>중복확인</span>
+					</button>
+				</div>
+			</div>
+			<div class="join_article">
+				<div class="joinText">
+					<label>비밀번호
+						<span class="essential_star">*</span>
+					</label>
+				</div>
+				<div class="blank_wrap">
+					<input data-testid="input-box" id="" name="" placeholder="비밀번호를 입력해주세요" type="text" 
+							required="" class="inner_blank" value="">
+				</div>
+			</div>
+			<div class="join_article">
+				<div class="joinText">
+					<label>비밀번호확인
+						<span class="essential_star">*</span>
+					</label>
+				</div>
+				<div class="blank_wrap">
+					<input data-testid="input-box" id="" name="" placeholder="비밀번호를 한번 더 입력해주세요" type="text" 
+							required="" class="inner_blank" value="">
+				</div>
+			</div>
+			<div class="join_article">
+				<div class="joinText">
+					<label>이름
+						<span class="essential_star">*</span>
+					</label>
+				</div>
+				<div class="blank_wrap">
+					<input data-testid="input-box" id="" name="" placeholder="이름을 입력해주세요" type="text" 
+							required="" class="inner_blank" value="">
+				</div>
+			</div>
+			<div class="join_article">
+				<div class="joinText">
+					<label>닉네임
+						<span class="essential_star">*</span>
+					</label>
+				</div>
+				<div class="blank_wrap">
+					<input data-testid="input-box" id="" name="" placeholder="닉네임을 입력해주세요" type="text" 
+							required="" class="inner_blank" value="">
+				</div>
+				<div class="check_wrap">
+					<button class="check_button">
+						<span>중복확인</span>
+					</button>
+				</div>
+			</div>
+			<div class="join_article">
+				<div class="joinText">
+					<label>회원 구분
+						<span class="essential_star">*</span>
+					</label>
+				</div>
+				<div class="join_radio_wrap">
+					<input data-testid="input-box" id="" name="" type="radio" 
+							required="" class="" value="1">
+					<span>일반 고객</span>
+					<input data-testid="input-box" id="" name="" type="radio" 
+							required="" class="" value="2">
+					<span>트레이너</span>
+				</div>
+			</div>
+			<div class="join_article">
+				<div class="joinText">
+					<label>성별
+						<span class="essential_star">*</span>
+					</label>
+				</div>
+				<div class="join_radio_wrap">
+					<input data-testid="input-box" id="" name="" type="radio" 
+							required="" class="" value="M">
+					<span>남자</span>
+					<input data-testid="input-box" id="" name="" type="radio" 
+							required="" class="" value="F">
+					<span>여자</span>
+				</div>
+			</div>
+			<div class="join_article">
+				<div class="joinText">
+					<label>이메일
+						<span class="essential_star">*</span>
+					</label>
+				</div>
+				<div class="blank_wrap">
+					<input data-testid="input-box" id="" name="" placeholder="예: TurningPoint@turn.com" type="text" 
+							required="" class="inner_blank" value="">
+				</div>
+				<div class="check_wrap">
+					<button class="check_button">
+						<span>중복확인</span>
+					</button>
+				</div>
+			</div>
+			<div class="join_article">
+				<div class="joinText">
+					<label>휴대폰번호
+						<span class="essential_star">*</span>
+					</label>
+				</div>
+				<div class="blank_wrap">
+					<input data-testid="input-box" id="" name="" placeholder="숫자만 입력해주세요" type="text" 
+							required="" class="inner_blank" value="">
+				</div>
+				<div class="check_wrap">
+					<button class="check_button">
+						<span>인증번호 받기</span>
+					</button>
+				</div>
+			</div>
+			<div class="join_article">
+				<div class="joinText">
+					<label>주소
+						<span class="essential_star">*</span>
+					</label>
+				</div>
+				<div class="blank_wrap">
+					<input data-testid="input-box" id="" name="" placeholder="주소 검색" type="text" 
+							required="" class="inner_blank" value="">
+				</div>
+			</div>
+			<div class="join_article">
+				<div class="joinText">
+					<label>자기소개
+						<span class="essential_star">*</span>
+					</label>
+				</div>
+				<div class="blank_wrap">
+					<textarea rows="" cols=""></textarea>
+				</div>
+			</div>
+			<div class="join_article">
+				<div class="joinText">
+					<label>경력
+						<span class="essential_star">*</span>
+					</label>
+				</div>
+				<select name="career" id="career" class="career_wrap">
+				    <option value="1">1년미만</option>
+				    <option value="3">3년미만</option>
+				    <option value="5">5년미만</option>
+				    <option value="8">8년미만</option>
+				    <option value="9">8년이상</option>
+				</select>
+			</div>
+			<div class="join_article">
+				<div class="joinText">
+					<label>내 체육관 정보
+						<span class="essential_star">*</span>
+					</label>
+				</div>
+				<div class="blank_wrap">
+					<textarea rows="" cols=""></textarea>
+				</div>
+			</div>
+			<div class="joinForm_wrap">
+				<div class="end_line"></div>
+				<button type="button" class="joinFormBtn" onclick="">
+	            	<span>회원가입</span>
+	            </button>
+			</div>
+		</div>
+	</div>
+	<div class="footer">
+	    <th:block th:insert="layouts/footer :: footer"></th:block>
+    </div>
+	<script type="text/javascript">
+	
+	</script>
+</body>
+</html>

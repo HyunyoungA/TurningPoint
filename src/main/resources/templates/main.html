@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+layout:decorate="layout/default_layout">
+<head>
+<meta charset="UTF-8" />
+<title>터닝포인트 TURNIN GPOINT</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<style type="text/css">
+* {
+    box-sizing: border-box;
+    margin: 0;
+	padding: 0;
+}
+.content {
+    position: relative;
+}
+.main-banner {
+    position: relative;
+    max-width: 1900px;
+    height: 370px;
+    margin: 0px auto 40px;
+}
+.slide {
+	min-width: 1050px;
+  	display: flex;
+  	flex-wrap: nowrap;
+  	/* 컨테이너의 내용물이 컨테이너 크기(width, height)를 넘어설 때 보이지 않도록 하기 위해 hidden을 준다. */
+  	overflow: hidden;
+  	position: relative;
+  	width: 100%;
+  	/* slide drag를 위해 DOM요소가 드래그로 선택되는것을 방지 */
+  	user-select: none;
+}
+.slide_item {
+  	display: flex;
+  	align-items: center;
+  	justify-content: center;
+
+  	/* position - 버튼 클릭시 left offset값을 적용시키기 위해 */
+  	position: relative;
+  	left: 0px;
+  	
+  	width: 100%;
+  	height: 370px;
+  	/* flex item의 flex-shrink는 기본값이 1이므로 컨테이너 크기에 맞게 줄어드는데, 슬라이드를 구현할 것이므로 줄어들지 않도록 0을 준다. */
+  	flex-shrink: 0;
+  	transition: left 0.15s;
+}
+.slide_button {
+  	display: flex;
+  	justify-content: center;
+  	align-items: center;
+  	position: absolute;
+  	/* 버튼이 중앙에 위치하게 하기위해 계산 */
+  	top: calc(50% - 16px);
+  	width: 32px;
+  	height: 32px;
+  	border-radius: 100%;
+  	background-color: #cccc;
+  	cursor: pointer;
+}
+.slide_prev_button {
+  	left: 10px;
+}
+.slide_next_button {
+  	right: 10px;
+}
+
+/* 각 슬라이드 적용 이미지 */
+.slide_item.item1 {
+  	background-color: darkgoldenrod;
+}
+.slide_item.item2 {
+  	background-color: aqua;
+}
+.slide_item.item3 {
+  	background-color: blueviolet;
+}
+.slide_item.item4 {
+  	background-color: burlywood;
+}
+.slide_item.item5 {
+  	background-color: cornflowerblue;
+}
+
+/* 페이지네이션 스타일 */
+ul,
+li {
+  	list-style-type: none;
+  	padding: 0;
+  	margin: 0;
+}
+.slide_pagination {
+  	/* layout */
+  	display: flex;
+  	gap: 5px;
+
+  	/* position */
+  	position: absolute;
+  	bottom: 0;
+  	/* left:50%, translateX(-50%)를 하면 가로 가운데로 위치시킬 수 있다. */
+  	left: 50%;
+  	transform: translateX(-50%);
+}
+.slide_pagination > li {
+  	/* 현재 슬라이드가 아닌 것은 투명도 부여 */
+  	color: #7fb5ff88;
+  	cursor: pointer;
+  	font-size: 25px;
+}
+.slide_pagination > li.active {
+  	/* 현재 슬라이드 색상은 투명도 없이 */
+  	color: #7fb5ff;
+}
+
+.slide_item_duplicate {
+  	display: flex;
+  	align-items: center;
+  	justify-content: center;
+  	position: relative;
+  	left: 0px;
+  	width: 100%;
+  	height: 300px;
+  	flex-shrink: 0;
+  	transition: left 0.15s;
+}
+.category {
+	display: flex;
+    flex-direction: column;
+    width: 1050px;
+    margin: 0px auto;
+}
+.categoryList_api {
+	display: inline-block;
+    vertical-align: top;
+    white-space: normal;
+}
+.category_tab {
+	display: block;
+    height: 36px;
+    margin: 12px 0 12px 6px;
+    padding: 0 12px;
+    border-radius: 36px;
+    font-weight: 500;
+    line-height: 36px;
+    color: #222225;
+    letter-spacing: -.3px;
+    text-decoration: none;
+    background-color: #f7f7f9;
+}
+.category_tab:hover {
+	background-color: #F0F0F0;
+}
+.category_tab i {
+	width: 14px;
+    height: 20px;
+    background-position: -114px -140px;
+}
+.category_wrap {
+	margin-bottom: 40px;
+    min-width: 1050px;
+    text-align: center;
+}
+.category_wrap h2 {
+    padding: 40px 0 20px 0;
+    font-size: 36px;
+    text-align: center;
+}
+a {
+	cursor: pointer;
+}
+.Bestreview_wrap {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 60px;
+    padding: 0 10px;
+    min-width: 1050px;
+}
+.Bestreview_tab {
+	display: block;
+	padding: 0 8px 30px;
+    width: 25%;
+}
+.thumb {
+    display: block;
+    position: relative;
+    padding-top: 100%;
+    border-radius: 8px;
+    background-repeat: no-repeat;
+    background-position: 50%;
+    background-size: cover;
+    overflow: hidden;
+}
+.thumb-img {
+	position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding-top: 110%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 50%;
+    transition: transform .25s ease-in-out;
+}
+.thumb span {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 26px;
+    height: 30px;
+    border-radius: 0;
+    font-size: 12px;
+    line-height: 26px;
+    font-weight: 500;
+    text-align: center;
+    color: #fff;
+    background: url(/static/23.06.01/images/ic-bg-flag@3x.png) no-repeat 0 0;
+    background-size: 100% 100%;
+    z-index: 10;
+}
+.title_text {
+    margin-top: 12px;
+    padding: 0;
+}
+</style>
+</head>
+<body>
+    <div id="wrap">
+    	<div id="header_wrap">
+     		<th:block th:insert="layouts/header :: header"></th:block>
+    	</div>
+    	<div class="content">
+    		<main>
+    			<!-- 메인배너 -->
+    			<div class="main-banner">
+    				<div class="slide slide_wrap">
+				      <div class="slide_item item1">1</div>
+				      <div class="slide_item item2">2</div>
+				      <div class="slide_item item3">3</div>
+				      <div class="slide_item item4">4</div>
+				      <div class="slide_item item5">5</div>
+				      <div class="slide_prev_button slide_button">◀</div>
+				      <div class="slide_next_button slide_button">▶</div>
+				      <ul class="slide_pagination"></ul>
+				    </div>
+    			</div>
+    			
+    			<!-- 카테고리 -->
+    			<div class="category">
+	    			<div class="category_wrap">
+	    				<h2>인기 매칭</h2>
+	    				<div class="categoryList_api">
+	    					<a class="category_tab">
+	    						<i></i>PT
+	    					</a>
+	    				</div>
+	    				<div class="categoryList_api">
+	    					<a class="category_tab">
+	    						<i></i>크로스핏
+	    					</a>
+	    				</div>
+	    				<div class="categoryList_api">
+	    					<a class="category_tab">
+	    						<i></i>필라테스
+	    					</a>
+	    				</div>
+	    				<div class="categoryList_api">
+	    					<a class="category_tab">
+	    						<i></i>요가
+	    					</a>
+	    				</div>
+	    			</div>
+	    			
+	    			<!-- 베스트 후기 선생님 리스트 -->
+	    			<div class="Bestreview_wrap">
+	    				<div class="Bestreview_tab">
+	    					<a>
+	    						<div class="thumb">
+	    							<div class="thumb-img" style="background-image: url(&quot;https://image.brandi.me/cproduct/BRANDI/2023/12/18/01b5f3c0-e363-430b-a9fb-b9144c0b7a42/SB000000000122184604_1702880529_image1_S.jpeg&quot;);"></div>
+	    							<span>1</span>
+	    						</div>
+	    						<div class="title_text">PT</div>
+	    					</a>
+	    				</div>
+	    				<div class="Bestreview_tab">
+	    					<a>
+	    						<div class="thumb">
+	    							<div class="thumb-img" style="background-image: url(&quot;https://image.brandi.me/cproduct/BRANDI/2023/12/18/01b5f3c0-e363-430b-a9fb-b9144c0b7a42/SB000000000122184604_1702880529_image1_S.jpeg&quot;);"></div>
+	    							<span>1</span>
+	    						</div>
+	    						<div class="title_text">PT</div>
+	    					</a>
+	    				</div>
+	    				<div class="Bestreview_tab">
+	    					<a>
+	    						<div class="thumb">
+	    							<div class="thumb-img" style="background-image: url(&quot;https://image.brandi.me/cproduct/BRANDI/2023/12/18/01b5f3c0-e363-430b-a9fb-b9144c0b7a42/SB000000000122184604_1702880529_image1_S.jpeg&quot;);"></div>
+	    							<span>1</span>
+	    						</div>
+	    						<div class="title_text">PT</div>
+	    					</a>
+	    				</div>
+	    				<div class="Bestreview_tab">
+	    					<a>
+	    						<div class="thumb">
+	    							<div class="thumb-img" style="background-image: url(&quot;https://image.brandi.me/cproduct/BRANDI/2023/12/18/01b5f3c0-e363-430b-a9fb-b9144c0b7a42/SB000000000122184604_1702880529_image1_S.jpeg&quot;);"></div>
+	    							<span>1</span>
+	    						</div>
+	    						<div class="title_text">PT</div>
+	    					</a>
+	    				</div>
+	    				<div class="Bestreview_tab">
+	    					<a>
+	    						<div class="thumb">
+	    							<div class="thumb-img" style="background-image: url(&quot;https://image.brandi.me/cproduct/BRANDI/2023/12/18/01b5f3c0-e363-430b-a9fb-b9144c0b7a42/SB000000000122184604_1702880529_image1_S.jpeg&quot;);"></div>
+	    							<span>1</span>
+	    						</div>
+	    						<div class="title_text">PT</div>
+	    					</a>
+	    				</div>
+	    				<div class="Bestreview_tab">
+	    					<a>
+	    						<div class="thumb">
+	    							<div class="thumb-img" style="background-image: url(&quot;https://image.brandi.me/cproduct/BRANDI/2023/12/18/01b5f3c0-e363-430b-a9fb-b9144c0b7a42/SB000000000122184604_1702880529_image1_S.jpeg&quot;);"></div>
+	    							<span>1</span>
+	    						</div>
+	    						<div class="title_text">PT</div>
+	    					</a>
+	    				</div>
+	    			</div>
+    			</div>
+    		</main>
+	    	<div class="footer">
+	    		<th:block th:insert="layouts/footer :: footer"></th:block>
+    		</div>
+    	</div>
+        <!-- <H1>DB 연동 확인</H1>
+ 
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>userCode</th>
+                    <th>userName</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="row:${Alllist}">
+                    <th th:text="${row.USER_ID}"></th>
+                    <th th:text="${row.USERNAME}"></th>
+ 
+                </tr>
+            </tbody>
+ 
+        </table> -->
+    </div>
+    
+    <script type="text/javascript">
+	/* $(document).ready(function(){
+		alert("dd");
+        $("#header_wrap").load("./header.html .header");
+    }); */
+    
+ 	// 슬라이크 전체 크기(width 구하기)
+    const slide = document.querySelector(".slide");
+    let slideWidth = slide.clientWidth;
+
+    // 버튼 선택
+    const prevBtn = document.querySelector(".slide_prev_button");
+    const nextBtn = document.querySelector(".slide_next_button");
+
+    // 슬라이드 전체를 선택해 값을 변경해주기 위해 슬라이드 전체 선택하기
+    let slideItems = document.querySelectorAll(".slide_item");
+    // 현재 슬라이드 위치가 슬라이드 개수를 넘기지 않게 하기 위한 변수
+    const maxSlide = slideItems.length;
+
+    // 버튼 클릭할 때 마다 현재 슬라이드가 어디인지 알려주기 위한 변수
+    let currSlide = 1;
+
+    // 페이지네이션 생성
+    const pagination = document.querySelector(".slide_pagination");
+
+    for (let i = 0; i < maxSlide; i++) {
+      if (i === 0) pagination.innerHTML += `<li class="active">•</li>`;
+      else pagination.innerHTML += `<li>•</li>`;
+    }
+
+    const paginationItems = document.querySelectorAll(".slide_pagination > li");
+
+    // 무한 슬라이드를 위해 start, end 슬라이드 복사하기
+    const startSlide = slideItems[0];
+    const endSlide = slideItems[slideItems.length - 1];
+    const startElem = document.createElement("div");
+    const endElem = document.createElement("div");
+
+    endSlide.classList.forEach((c) => endElem.classList.add(c));
+    endElem.innerHTML = endSlide.innerHTML;
+
+    startSlide.classList.forEach((c) => startElem.classList.add(c));
+    startElem.innerHTML = startSlide.innerHTML;
+
+    // 각 복제한 엘리먼트 추가하기
+    slideItems[0].before(endElem);
+    slideItems[slideItems.length - 1].after(startElem);
+
+    // 슬라이드 전체를 선택해 값을 변경해주기 위해 슬라이드 전체 선택하기
+    slideItems = document.querySelectorAll(".slide_item");
+    
+    let offset = slideWidth + currSlide;
+    slideItems.forEach((i) => {
+      i.setAttribute("style", `left: ${-offset}px`);
+    });
+
+    function nextMove() {
+      currSlide++;
+      // 마지막 슬라이드 이상으로 넘어가지 않게 하기 위해서
+      if (currSlide <= maxSlide) {
+        // 슬라이드를 이동시키기 위한 offset 계산
+        const offset = slideWidth * currSlide;
+        // 각 슬라이드 아이템의 left에 offset 적용
+        slideItems.forEach((i) => {
+          i.setAttribute("style", `left: ${-offset}px`);
+        });
+        // 슬라이드 이동 시 현재 활성화된 pagination 변경
+        paginationItems.forEach((i) => i.classList.remove("active"));
+        paginationItems[currSlide - 1].classList.add("active");
+      } else {
+        // 무한 슬라이드 기능 - currSlide 값만 변경해줘도 되지만 시각적으로 자연스럽게 하기 위해 아래 코드 작성
+        currSlide = 0;
+        let offset = slideWidth * currSlide;
+        slideItems.forEach((i) => {
+          i.setAttribute("style", `transition: ${0}s; left: ${-offset}px`);
+        });
+        currSlide++;
+        offset = slideWidth * currSlide;
+        // 각 슬라이드 아이템의 left에 offset 적용
+        setTimeout(() => {
+          // 각 슬라이드 아이템의 left에 offset 적용
+          slideItems.forEach((i) => {
+            i.setAttribute("style", `transition: ${0.15}s; left: ${-offset}px`);
+          });
+        }, 0);
+        //슬라이드 이동 시 현재 활성화된 pagination 변경
+        paginationItems.forEach((i) => i.classList.remove("active"));
+        paginationItems[currSlide - 1].classList.add("active");
+      }
+    }
+    function prevMove() {
+      currSlide--;
+      // 1번째 슬라이드 이하로 넘어가지 않게 하기 위해서
+      if (currSlide > 0) {
+        // 슬라이드를 이동시키기 위한 offset 계산
+        const offset = slideWidth * currSlide;
+        // 각 슬라이드 아이템의 left에 offset 적용
+        slideItems.forEach((i) => {
+          i.setAttribute("style", `left: ${-offset}px`);
+        });
+        // 슬라이드 이동 시 현재 활성화된 pagination 변경
+        paginationItems.forEach((i) => i.classList.remove("active"));
+        paginationItems[currSlide - 1].classList.add("active");
+      } else {
+        // 무한 슬라이드 기능 - currSlide 값만 변경해줘도 되지만 시각적으로 자연스럽게 하기 위해 아래 코드 작성
+        currSlide = maxSlide + 1;
+        let offset = slideWidth * currSlide;
+        // 각 슬라이드 아이템의 left에 offset 적용
+        slideItems.forEach((i) => {
+          i.setAttribute("style", `transition: ${0}s; left: ${-offset}px`);
+        });
+        currSlide--;
+        offset = slideWidth * currSlide;
+        setTimeout(() => {
+          // 각 슬라이드 아이템의 left에 offset 적용
+          slideItems.forEach((i) => {
+            i.setAttribute("style", `transition: ${0.15}s; left: ${-offset}px`);
+          });
+        }, 0);
+        // 슬라이드 이동 시 현재 활성화된 pagination 변경
+        paginationItems.forEach((i) => i.classList.remove("active"));
+        paginationItems[currSlide - 1].classList.add("active");
+      }
+    }
+
+    // 버튼 엘리먼트에 클릭 이벤트 추가하기
+    nextBtn.addEventListener("click", () => {
+      // 이후 버튼 누를 경우 현재 슬라이드를 변경
+      nextMove();
+    });
+    // 버튼 엘리먼트에 클릭 이벤트 추가하기
+    prevBtn.addEventListener("click", () => {
+      // 이전 버튼 누를 경우 현재 슬라이드를 변경
+      prevMove();
+    });
+
+    // 브라우저 화면이 조정될 때 마다 slideWidth를 변경하기 위해
+    window.addEventListener("resize", () => {
+      slideWidth = slide.clientWidth;
+    });
+
+    // 각 페이지네이션 클릭 시 해당 슬라이드로 이동하기
+    for (let i = 0; i < maxSlide; i++) {
+      // 각 페이지네이션마다 클릭 이벤트 추가하기
+      paginationItems[i].addEventListener("click", () => {
+        // 클릭한 페이지네이션에 따라 현재 슬라이드 변경해주기(currSlide는 시작 위치가 1이기 때문에 + 1)
+        currSlide = i + 1;
+        // 슬라이드를 이동시키기 위한 offset 계산
+        const offset = slideWidth * currSlide;
+        // 각 슬라이드 아이템의 left에 offset 적용
+        slideItems.forEach((i) => {
+          i.setAttribute("style", `left: ${-offset}px`);
+        });
+        // 슬라이드 이동 시 현재 활성화된 pagination 변경
+        paginationItems.forEach((i) => i.classList.remove("active"));
+        paginationItems[currSlide - 1].classList.add("active");
+      });
+    }
+
+    // 드래그(스와이프) 이벤트를 위한 변수 초기화
+    let startPoint = 0;
+    let endPoint = 0;
+
+    // PC 클릭 이벤트 (드래그)
+    slide.addEventListener("mousedown", (e) => {
+      startPoint = e.pageX; // 마우스 드래그 시작 위치 저장
+    });
+
+    slide.addEventListener("mouseup", (e) => {
+      endPoint = e.pageX; // 마우스 드래그 끝 위치 저장
+      if (startPoint < endPoint) {
+        // 마우스가 오른쪽으로 드래그 된 경우
+        prevMove();
+      } else if (startPoint > endPoint) {
+        // 마우스가 왼쪽으로 드래그 된 경우
+        nextMove();
+      }
+    });
+
+    // 모바일 터치 이벤트 (스와이프)
+    slide.addEventListener("touchstart", (e) => {
+      startPoint = e.touches[0].pageX; // 터치가 시작되는 위치 저장
+    });
+    slide.addEventListener("touchend", (e) => {
+      endPoint = e.changedTouches[0].pageX; // 터치가 끝나는 위치 저장
+      if (startPoint < endPoint) {
+        // 오른쪽으로 스와이프 된 경우
+        prevMove();
+      } else if (startPoint > endPoint) {
+        // 왼쪽으로 스와이프 된 경우
+        nextMove();
+      }
+    });
+
+    // 기본적으로 슬라이드 루프 시작하기
+    let loopInterval = setInterval(() => {
+      nextMove();
+    }, 3000);
+
+    // 슬라이드에 마우스가 올라간 경우 루프 멈추기
+    slide.addEventListener("mouseover", () => {
+      clearInterval(loopInterval);
+    });
+
+    // 슬라이드에서 마우스가 나온 경우 루프 재시작하기
+    slide.addEventListener("mouseout", () => {
+      loopInterval = setInterval(() => {
+        nextMove();
+      }, 3000);
+    });
+    </script>
+    
+    <script type="text/javascript" src="/js/common.js"></script>
+    
+</body>
+</html>
