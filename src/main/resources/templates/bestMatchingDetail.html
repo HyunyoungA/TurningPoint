@@ -309,7 +309,7 @@ a {
 </head>
 <body>
     <div id="wrap">
-    	<div id="modal_wrap">
+    	<div id="modal_wrap" class="modal_hidden hidden">
      		<th:block th:insert="layouts/modal :: modal"></th:block>
     	</div>
     	<div id="header_wrap">
@@ -399,7 +399,7 @@ a {
 	    						<div class="reply_inner">
 		    						<div class="title_text">매칭문의 | 매칭신청</div>
 			    					<div class="reply_inner_btn">
-			    						<button class="replyCreateBtn" type="button" width="120" height="40">
+			    						<button class="replyCreateBtn" type="button" width="120" height="40" onclick="init()">
 			    							<span>문의 | 신청하기</span>
 			    						</button>
 			    					</div>
