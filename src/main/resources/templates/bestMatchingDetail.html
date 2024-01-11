@@ -284,7 +284,7 @@ a {
     width: 44px;
     height: 44px;
     padding: 0px;
-    margin: 0px;
+    margin: 10px;
     border: 0px;
     cursor: pointer;
     background-color: transparent;
@@ -305,10 +305,54 @@ a {
     background-repeat: no-repeat;
     background-size: cover;
 }
+.focusBtn {
+	margin: 0;
+    border: none;
+    background: none;
+    font: inherit;
+    font-size: 14px;
+    line-height: 20px;
+    display: inline-flex;
+    -webkit-box-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    align-items: center;
+    height: 44px;
+    border-radius: 4px;
+    color: #FFFFFF;
+    background-color: #35C5F0;
+    width: 44px;
+    padding: 0;
+    vertical-align: middle;
+    margin-right: 10px;
+}
+.numberBtn {
+	display: inline-block;
+    margin: 0;
+    border: none;
+    background: none;
+    font: inherit;
+    height: 44px;
+    border-radius: 4px;
+    font-size: 14px;
+    line-height: 18px;
+    color: #2F3438;
+    font-weight: 500;
+    width: 44px;
+    padding: 0;
+    vertical-align: middle;
+    margin-right: 10px;
+}
 </style>
 </head>
 <body>
     <div id="wrap">
+    	<div id="imgFileListModal_wrap" class="imgFileListModal_hidden hidden">
+     		<th:block th:insert="layouts/imgFileListModal :: imgFileListModal"></th:block>
+    	</div>
+    	<div id="imgFileDetailModal_wrap" class="imgFileDetailModal_hidden">
+     		<th:block th:insert="layouts/imgFileDetailModal :: imgFileDetailModal"></th:block>
+    	</div>
     	<div id="modal_wrap" class="modal_hidden hidden">
      		<th:block th:insert="layouts/modal :: modal"></th:block>
     	</div>
@@ -535,6 +579,16 @@ a {
 		    					<!-- 페이징 -->
 		    					<div class="replyPaging">
 		    						<button class="pre" type="button"></button>
+		    						<button class="focusBtn" type="button">1</button>
+		    						<button class="numberBtn" type="button">2</button>
+		    						<button class="numberBtn" type="button">3</button>
+		    						<button class="numberBtn" type="button">4</button>
+		    						<button class="numberBtn" type="button">5</button>
+		    						<button class="numberBtn" type="button">6</button>
+		    						<button class="numberBtn" type="button">7</button>
+		    						<button class="numberBtn" type="button">8</button>
+		    						<button class="numberBtn" type="button">9</button>
+		    						<button class="numberBtn" type="button">10</button>
 		    						<button class="next" type="button"></button>
 		    					</div>
 	    					</div>
@@ -571,6 +625,7 @@ a {
     </script>
     
     <script type="text/javascript" src="/js/common.js"></script>
+    <script type="text/javascript" src="/js/bestMatchingDetail.js"></script>
     
 </body>
 </html>

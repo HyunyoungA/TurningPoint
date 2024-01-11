@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<th:block th:fragment="imgFileDetailModal">
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<meta charset="UTF-8"/>
+<style>
+#imgFileDetailModal {
+    position: relative;
+    z-index: 2;
+}
+#imgFileDetailModal.modal-overlay {
+	position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+	width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+}
+#imgFileDetailModal .modal-window {
+background: white;
+    backdrop-filter: blur( 13.5px );
+    border-radius: 20px;
+    width: 800px;
+    height: 670px;
+    position: relative;
+    padding: 25px;
+}
+#imgFileDetailModal .title {
+    display: inline;
+}
+#imgFileDetailModal .title .title_wrap {
+	display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    padding-bottom: 22px;
+    border-bottom: 1px solid rgb(244, 244, 244);
+    letter-spacing: -1px;
+}
+#imgFileDetailModal .title div .titleText {
+	font-size: 22px;
+    font-weight: 500;
+    line-height: 30px;
+    color: rgb(51, 51, 51);
+}
+#imgFileDetailModal .title span {
+	width: 32px;
+    height: 32px;
+    display: inline-block;
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICAgIDxnIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0iZXZlbm9kZCI+CiAgICAgICAgPHBhdGggZmlsbD0ibm9uZSIgZD0iTTAgMGgzMnYzMkgweiIvPgogICAgICAgIDxnIHN0cm9rZT0iIzk5OSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIj4KICAgICAgICAgICAgPHBhdGggZD0iTTI2IDI2IDYgNk02IDI2IDI2IDYiLz4KICAgICAgICA8L2c+CiAgICAgICAgPHBhdGggZD0ibTYuMjg0IDUuNTg5LjA3LjA1N0wxNiAxNS4yOTNsOS42NDYtOS42NDdhLjUuNSAwIDAgMSAuNzY1LjYzOGwtLjA1Ny4wN0wxNi43MDcgMTZsOS42NDcgOS42NDZhLjUuNSAwIDAgMS0uNjM4Ljc2NWwtLjA3LS4wNTdMMTYgMTYuNzA3bC05LjY0NiA5LjY0N2EuNS41IDAgMCAxLS43NjUtLjYzOGwuMDU3LS4wN0wxNS4yOTMgMTYgNS42NDYgNi4zNTRhLjUuNSAwIDAgMSAuNjM4LS43NjV6IiBmaWxsPSIjOTk5Ii8+CiAgICA8L2c+Cjwvc3ZnPgo=);
+    background-size: cover;
+    background-position: center center;
+    cursor: pointer;
+}
+.modal_background{
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100vh;
+	background-color: rgba(0, 0, 0, 0.3);
+	z-index: 1000;
+}
+#imgFileDetailModal ul{
+	list-style: none;
+}
+#imgFileDetailModal .imgDetail_inner{
+	float: left;
+    width: 78px;
+    margin: 0 5px 5px 0;
+}
+#imgFileDetailModal .imgDetail_content {
+    padding: 12px 0;
+	width: 750px;
+    height: 556px;
+    position: relative;
+}
+#imgFileDetailModal .imgDetail_wrap{
+    float: left;
+	width: 450px;
+    height: 550px;
+}
+#imgFileDetailModal .info_area {
+    float: right;
+    width: 250px;
+    min-height: 554px;
+    max-height: 554px;
+    overflow: hidden;
+    overflow-y: auto;
+    border-bottom: 1px solid #e5e5e5;
+}
+#imgFileDetailModal .bigImg {
+	width: 100%;
+}
+#imgFileDetailModal .thumb_slide {
+	position: relative;
+	width: 500px;
+    height: 500px;
+    margin-bottom: 5px;
+    background-color: #f5f5f5;
+}
+#imgFileDetailModal .slick-list {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+}
+#imgFileDetailModal .slick-arrow.slick-prev {
+    left: 0;
+    background: url(https://static.oliveyoung.co.kr/pc-static-root/image/comm/bul_arr_8x13_1.png) 50% 50% no-repeat rgba(0,0,0,.2);
+}
+#imgFileDetailModal .slick-arrow {
+    position: absolute;
+    top: 50%;
+    z-index: 2;
+    width: 40px;
+    height: 80px;
+    margin-top: -40px;
+}
+#imgFileDetailModal .slick-track {
+    position: relative;
+    top: 0;
+    left: 0;
+    display: block;
+    z-index: 1;
+}
+#imgFileDetailModal .bigImg {
+	position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: auto!important;
+    max-width: 500px;
+    height: auto!important;
+    max-height: 500px;
+}
+#imgFileDetailModal .slick-next {
+    right: 0;
+    background: url(https://static.oliveyoung.co.kr/pc-static-root/image/comm/bul_arr_8x13_2.png) 50% 50% no-repeat rgba(0,0,0,.2);
+}
+</style>
+</head>
+<body>
+<div class="modal_background">
+	<div id="imgFileDetailModal" class="modal-overlay">
+		<div class="modal-window">
+			<div class="title">
+				<div class="title_wrap">
+					<div class="titleText">사진상세</div>
+					<span></span>
+				</div>
+			</div>
+			<div class="imgDetail_content">
+				<div class="imgDetail_wrap">
+					<div class="thumb_slide">
+						<button type="button" data-attr="상품상세^포토상세^포토상세이동_화살표" data-role="none" class="slick-prev slick-arrow" 
+								aria-label="Previous" role="button" style="display: block;">
+						</button>
+						<div class="slick-list draggable"><div class="slick-track" style="opacity: 1; width: 53000px; transform: translate3d(-1500px, 0px, 0px);">
+							<div class="slick-slide slick-cloned" data-slick-index="-1" aria-hidden="true" style="width: 500px;" tabindex="-1">
+				    			<span class="base">
+				    				<img src="https://static.oliveyoung.co.kr/pc-static-root/image//comm/bg_2_2.png" alt="">
+				    			</span>
+				    			<img alt="" class="bigImg" name="25027199" data-value="25027199_1_0_0" onerror="common.errorImg(this);">
+								<input type="hidden" value="" tabindex="-1">
+				    		</div>
+				    		</div>
+						</div>
+						<button type="button" class="slick-next slick-arrow" style="display: block;"></button>
+						
+						<ul class="">
+							<li class="imgDetail_inner">
+								<a href="javascript:;">
+									<span class="thum">
+										<img alt="" class="bigImg" name="25096678" data-value="25099118_1_25096678_2" onerror="common.errorImg(this);" src="https://image.oliveyoung.co.kr/uploads/images/gdasEditor/2024/01/11/1704901773996.png">
+									</span>
+								</a>
+							</li>
+						</ul>
+					</div>
+					<div class="thumb_slide_nav">
+					
+					</div>
+					
+				</div>
+				<div class="info_area">
+				
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script>
+</script>
+
+</body>
+</html>

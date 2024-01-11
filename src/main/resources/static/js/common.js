@@ -1,18 +1,5 @@
-console.log("파일연결성공");
-//$(document).ready(function(){
-//	$("#header_wrap").load("header.html");
-//});
+console.log("공통 js파일 연결성공");
 
-//모달창 오픈
-var modal = document.querySelector("#modal_wrap");
-function init(){
-	modal.classList.remove("hidden");
-}
-//모달창 숨기기
-$(document).on("click", "#modal .content .con_btn_wrap .modal_btn, #modal .title span", function () {
-	$(".reset").val('');
-     modal.classList.add("hidden");
-});
 function loadHTML(file){
 console.log("연결성공");
     var rawFile = new XMLHttpRequest();
