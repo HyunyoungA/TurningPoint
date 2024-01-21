@@ -16,7 +16,30 @@ $(document).on("click", "#modal .content .con_btn_wrap .modal_btn, #modal .title
 });
 
 //인기 매칭-트레이너 후기 사진 더보기 => 이미지리스트 모달창 오픈
-var modal = document.querySelector(".moreReview");
-function init(){
-	modal.classList.remove("hidden");
+var moreReviewImgFile = document.querySelector("#imgFileListModal_wrap");
+function moreReviewImgFileOpen(){
+	moreReviewImgFile.classList.remove("hidden");
 }
+
+//인기 매칭-트레이너 후기 사진 더보기 => 이미지리스트 모달창 숨기기
+$(document).on("click", "#imgFileListModal .modal-window .title span", function () {
+     moreReviewImgFile.classList.add("hidden");
+});
+
+//인기 매칭-트레이너 후기 사진 더보기 => 이미지리스트 => 리뷰 디테일 모달창 오픈
+var reviewDetailModal = document.querySelector("#reviewDetailModal_wrap");
+function reviewDetailOpen(){
+	reviewDetailModal.classList.remove("hidden");
+}
+
+//인기 매칭-트레이너 후기 사진 더보기 => 이미지리스트 => 리뷰 디테일 모달창 숨기기
+$(document).on("click", "#imgFileDetailModal .modal-window .title span", function () {
+     reviewDetailModal.classList.add("hidden");
+});
+
+
+
+
+
+
+

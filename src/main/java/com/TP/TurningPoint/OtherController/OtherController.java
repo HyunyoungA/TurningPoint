@@ -30,4 +30,10 @@ public class OtherController {
 	public String bestMatchingDetail() {
 		return "bestMatchingDetail";
 	}
+    
+    //베스트리뷰 상세페이지
+    @GetMapping("/bestReviewDetail")
+	public String bestReviewDetail() {
+		return "bestReviewDetail";
+	}
 }

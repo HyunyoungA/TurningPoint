@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
-<th:block th:fragment="imgFileDetailModal">
+<th:block th:fragment="reviewDetailModal">
 <head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <meta charset="UTF-8"/>
 <style>
 #imgFileDetailModal {
+	color: #666;
+	font-size: 14px;
     position: relative;
     z-index: 2;
 }
@@ -76,7 +78,7 @@ background: white;
     margin: 0 5px 5px 0;
 }
 #imgFileDetailModal .imgDetail_content {
-    padding: 12px 0;
+    padding: 23px 0;
 	width: 750px;
     height: 556px;
     position: relative;
@@ -88,9 +90,9 @@ background: white;
 }
 #imgFileDetailModal .info_area {
     float: right;
-    width: 250px;
-    min-height: 554px;
-    max-height: 554px;
+    width: 290px;
+    min-height: 536px;
+    max-height: 536px;
     overflow: hidden;
     overflow-y: auto;
     border-bottom: 1px solid #e5e5e5;
@@ -100,8 +102,8 @@ background: white;
 }
 #imgFileDetailModal .thumb_slide {
 	position: relative;
-	width: 500px;
-    height: 500px;
+	width: 430px;
+    height: 430px;
     margin-bottom: 5px;
     background-color: #f5f5f5;
 }
@@ -135,18 +137,111 @@ background: white;
 	position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%,-50%);
+	transform: translate(-7%,-12%);
     width: auto!important;
-    max-width: 500px;
+    max-width: 430px;
     height: auto!important;
-    max-height: 500px;
+    max-height: 430px;
 }
 #imgFileDetailModal .slick-next {
     right: 0;
     background: url(https://static.oliveyoung.co.kr/pc-static-root/image/comm/bul_arr_8x13_2.png) 50% 50% no-repeat rgba(0,0,0,.2);
 }
-#imgFileDetailModal .userNickName{
-	
+#imgFileDetailModal .thumb_slide_nav {
+    width: 430px;
+    height: 100px;
+}
+#imgFileDetailModal .thumb_slide_img {
+    margin: 2px;
+	float: left;
+    width: 82px;
+    height: 82px;
+    background: black;
+}
+#imgFileDetailModal .thum {
+	float: left;
+    position: relative;
+    width: 60px;
+    height: 60px;
+    margin: 0;
+}
+#imgFileDetailModal .thum .bg {
+	position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    overflow: hidden;
+    width: 60px;
+    height: 60px;
+    background: url(https://static.oliveyoung.co.kr/pc-static-root/image/comm/bg_my_picture.png) 0 0/60px no-repeat;
+}
+#imgFileDetailModal .thum img {
+	width: 60px;
+    height: 60px;
+}
+#imgFileDetailModal .userInfo {
+	padding-bottom: 15px;
+}
+#imgFileDetailModal .userInfo .userNickName {
+    padding-left: 10px;
+    font-weight: bold;
+    height: 60px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex-direction: column;
+}
+#imgFileDetailModal .info_area .date {
+	display: inline-block;
+    margin: -2px 0 0 7px;
+    color: #888;
+    vertical-align: top;
+	font-size: 13px;
+    line-height: 20px;
+}
+#imgFileDetailModal .info_area .score_area {
+    float: left;
+}
+#imgFileDetailModal .info_area .review_point {
+	float: left;
+    display: inline-block;
+    overflow: hidden;
+    width: 92px;
+    height: 15px;
+    background: url(https://static.oliveyoung.co.kr/pc-static-root/image/comm/ico_review_point_off.png) no-repeat;
+    text-indent: -9999px;
+}
+#imgFileDetailModal .info_area .point {
+    background-image: url(https://static.oliveyoung.co.kr/pc-static-root/image/comm/ico_review_point_on@2x.png);
+    background-size: 92px 15px;
+	display: inline-block;
+    float: left;
+    width: auto;
+    height: 15px;
+    background: url(https://static.oliveyoung.co.kr/pc-static-root/image/comm/ico_review_point_on.png) no-repeat;
+    line-height: 0;
+}
+#imgFileDetailModal .info_area .txt_inner {
+    margin-top: 14px;
+}
+#imgFileDetailModal .info_area .user_trainer {
+	width: 290px;
+    padding-top: 21px;
+    padding-bottom: 9px;
+    border-top: 1px solid #e5e5e5;
+	position:absolute;
+	bottom:0px;
+}
+#imgFileDetailModal .info_area h4{
+    padding-bottom: 110px;
+    position: absolute;
+    bottom: 0px;
+}
+#imgFileDetailModal .user_trainer {
+    padding-bottom: 110px;
+    position: absolute;
+    bottom: 0px;
+    cursor: pointer;
 }
 </style>
 </head>
@@ -166,14 +261,15 @@ background: white;
 						<button type="button" data-attr="상품상세^포토상세^포토상세이동_화살표" data-role="none" class="slick-prev slick-arrow" 
 								aria-label="Previous" role="button" style="display: block;">
 						</button>
-						<div class="slick-list draggable"><div class="slick-track" style="opacity: 1; width: 53000px; transform: translate3d(-1500px, 0px, 0px);">
-							<div class="slick-slide slick-cloned" data-slick-index="-1" aria-hidden="true" style="width: 500px;" tabindex="-1">
-				    			<span class="base">
-				    				<img src="https://static.oliveyoung.co.kr/pc-static-root/image//comm/bg_2_2.png" alt="">
-				    			</span>
-				    			<img alt="" class="bigImg" name="25027199" data-value="25027199_1_0_0" onerror="common.errorImg(this);">
-								<input type="hidden" value="" tabindex="-1">
-				    		</div>
+						<div class="slick-list draggable">
+							<div class="slick-track" style="opacity: 1; width: 53000px; transform: translate3d(-1500px, 0px, 0px);">
+								<div class="slick-slide slick-cloned" data-slick-index="-1" aria-hidden="true" style="width: 500px;" tabindex="-1">
+					    			<span class="base">
+					    				<img src="https://static.oliveyoung.co.kr/pc-static-root/image//comm/bg_2_2.png" alt="">
+					    			</span>
+					    			<img alt="" class="bigImg" name="25027199" data-value="25027199_1_0_0" onerror="common.errorImg(this);">
+									<input type="hidden" value="" tabindex="-1">
+					    		</div>
 				    		</div>
 						</div>
 						<button type="button" class="slick-next slick-arrow" style="display: block;"></button>
@@ -189,13 +285,48 @@ background: white;
 						</ul>
 					</div>
 					<div class="thumb_slide_nav">
-					
+						<div class="thumb_slide_img">
+						</div>
+						<div class="thumb_slide_img">
+						</div>
+						<div class="thumb_slide_img">
+						</div>
+						<div class="thumb_slide_img">
+						</div>
+						<div class="thumb_slide_img">
+						</div>
 					</div>
 					
 				</div>
 				<div class="info_area">
 					<div class="userInfo">
+						<div class="thum">
+						    <span class="bg"></span>
+						    <img src="https://static.oliveyoung.co.kr/pc-static-root/image/comm/my_picture_base.jpg" alt="">
+						</div>
 						<p class="userNickName">userNickname</p>
+					</div>
+					<div class="score_area">
+						<span class="review_point">
+					    	<span class="point" style="width:100%">
+					    		5점만점에 5점
+					    	</span>
+						</span>
+						<span class="date">2024.01.17</span>
+					</div>
+					<br>
+					<div class="txt_inner">
+						평소에 루에브르 가방과 옷을 즐겨 입어서 궁금해서 사봤는데 옷만큼 애정 넘치는 아이템이 된듯해요. 동생한테 선물하고 같이 쓰고 있는데 은은하면서 부담스럼지않고 막 쓰기에도 좋네요. 다쓰면 오브도 사고 싶어요. 병도 이쁘고 향수 좋아요.    
+					</div>
+					<h4>매칭 트레이너</h4>
+					<div class="user_trainer">
+						<div class="userInfo">
+							<div class="thum">
+							    <span class="bg"></span>
+							    <img src="https://static.oliveyoung.co.kr/pc-static-root/image/comm/my_picture_base.jpg" alt="">
+							</div>
+							<p class="userNickName">트레이너 이름</p>
+						</div>
 					</div>
 				</div>
 			</div>
